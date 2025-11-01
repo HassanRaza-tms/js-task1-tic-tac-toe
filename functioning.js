@@ -3,6 +3,7 @@ let i = 0;
 let classname;
 let merged = ""
 let selected_class = ""
+let winner = "none"
 let rcvdindex;
 
 
@@ -23,10 +24,10 @@ function getclass() {
     if (i % 2 == 0) {
         // Double click validation
         if(selected_class.innerHTML == "✔" || selected_class.innerHTML == "❌"){
-            console.log("I Before double click",i)
+            // console.log("I Before double click",i) // for verofying logic
             alert("This box is already occupied")
             i = i-1 ;
-            console.log("I After double click",i)
+            // console.log("I After double click",i) // for verofying logic
         }
         else{
             selected_class.innerHTML = "✔" 
@@ -44,9 +45,11 @@ function getclass() {
             let pop_selector = document.querySelector('.pop-up')
             pop_selector.style.display = 'flex'
 
-            let text_to_changes = document.querySelector('p')
-            pop_selector.innerHTML = 'Player 1 Won!'
-            // automatically reloads the file once a player wins
+            let text_to_changed = document.querySelector('p')
+            text_to_changed.innerHTML = 'Player 1 Won!'
+            winner = "player1"
+
+            // reloads file on pop up closure
 
             pop_selector.onclick = () => {
                 location.reload();
@@ -58,10 +61,10 @@ function getclass() {
     else {
         // text and colour to be inputed
         if(selected_class.innerHTML == "✔" || selected_class.innerHTML == "❌"){
-            console.log("I Before double click",i)
+            // console.log("I Before double click",i)  // for verofying logic
             alert("This box is already occupied")
             i = i - 1;
-            console.log("I After double click",i)
+            // console.log("I After double click",i) // for verofying logic
         }
         else{
             selected_class.innerHTML = "❌" 
@@ -79,12 +82,15 @@ function getclass() {
             let pop_selector = document.querySelector('.pop-up')
             pop_selector.style.display = 'flex'
 
-            let text_to_changes = document.querySelector('p')
-            pop_selector.innerHTML = 'Player 2 Won!'
-            // automatically reloads the file once a player wins
+            let text_to_changed = document.querySelector('p')
+            text_to_changed.innerHTML = 'Player 2 Won!'
+            winner = "player2"
+            
 
             pop_selector.onclick = () => {
-                location.reload();
+
+                // reloads file on pop up closure
+                    location.reload();
             }
             
         }
@@ -94,6 +100,19 @@ function getclass() {
 
     i++;
 
+    if(i==9 && winner=="none"){
+        let pop_selector = document.querySelector('.pop-up')
+        pop_selector.style.display = 'flex'
+        
+        let text_to_changed = document.querySelector('p')
+        text_to_changed.innerHTML = 'Match has been drawn'
+
+        pop_selector.onclick = () => {
+            // reloads file on pop up closure
+                location.reload();
+        }
+    }
 
 }
+
 
